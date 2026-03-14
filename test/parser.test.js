@@ -17,6 +17,10 @@ describe('npm install', () => {
     assertPackages('npm install express', ['express']);
   });
 
+  it('handles sudo npm install', () => {
+    assertPackages('sudo npm install express', ['express']);
+  });
+
   it('extracts multiple packages', () => {
     assertPackages('npm install express axios react', ['express', 'axios', 'react']);
   });
@@ -69,6 +73,10 @@ describe('npx', () => {
     assertPackages('npx create-react-app my-app', ['create-react-app']);
   });
 
+  it('handles sudo npx', () => {
+    assertPackages('sudo npx create-react-app my-app', ['create-react-app']);
+  });
+
   it('skips npx flags before package', () => {
     assertPackages('npx -y prettier --write .', ['prettier']);
   });
@@ -90,6 +98,10 @@ describe('yarn add', () => {
     assertPackages('yarn add express axios', ['express', 'axios']);
   });
 
+  it('handles sudo yarn add', () => {
+    assertPackages('sudo yarn add express', ['express']);
+  });
+
   it('handles yarn global add', () => {
     assertPackages('yarn global add typescript', ['typescript']);
   });
@@ -102,6 +114,10 @@ describe('yarn add', () => {
 describe('pnpm add', () => {
   it('extracts packages', () => {
     assertPackages('pnpm add lodash', ['lodash']);
+  });
+
+  it('handles sudo pnpm add', () => {
+    assertPackages('sudo pnpm add lodash', ['lodash']);
   });
 
   it('handles pnpm install', () => {
@@ -130,6 +146,10 @@ describe('require()', () => {
 
   it('excludes node: protocol', () => {
     assertPackages("require('node:path')", []);
+  });
+
+  it('excludes bun: protocol', () => {
+    assertPackages("require('bun:crypto')", []);
   });
 
   it('strips subpath from require', () => {
