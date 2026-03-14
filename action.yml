@@ -1,9 +1,7 @@
 name: 'Slop Scan'
 description: >
-  Scan your code and documentation for npm package references and verify they
-  exist on the npm registry. Flags hallucinated (not-found) packages and
-  suspicious packages with low download counts — both are potential
-  slopsquatting targets.
+  Github Action and npx tool that flags hallucinated and
+  suspicious packages as slopsquatting targets.
 author: 'Erayaha AI'
 
 branding:
