@@ -1,0 +1,38 @@
+{
+  "name": "slop-scan",
+  "version": "1.0.0",
+  "description": "Security CLI that verifies npm packages mentioned in your code and docs actually exist on the npm registry",
+  "type": "module",
+  "author": "Erayaha AI",
+  "license": "MIT",
+  "homepage": "https://github.com/erayaha/slop-scan#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/erayaha/slop-scan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erayaha/slop-scan/issues"
+  },
+  "bin": {
+    "slop-scan": "./bin/slop-scan.js"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "node bin/slop-scan.js"
+  },
+  "keywords": [
+    "security",
+    "npm",
+    "slopsquatting",
+    "ai-hallucination",
+    "supply-chain",
+    "cli"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ]
+}

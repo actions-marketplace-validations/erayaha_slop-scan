@@ -1,0 +1,49 @@
+name: 'Slop Scan'
+description: >
+  Scan your code and documentation for npm package references and verify they
+  exist on the npm registry. Flags hallucinated (not-found) packages and
+  suspicious packages with low download counts — both are potential
+  slopsquatting targets.
+author: 'Erayaha AI'
+
+branding:
+  icon: 'shield'
+  color: 'red'
+
+inputs:
+  directory:
+    description: 'Directory to scan (default: repository root)'
+    required: false
+    default: '.'
+  threshold:
+    description: >
+      Weekly download count below which an existing package is flagged as
+      suspicious (default: 500)
+    required: false
+    default: '500'
+  fail-on-suspicious:
+    description: >
+      Exit with a non-zero code when suspicious or not-found packages are
+      detected. Set to "false" to report issues without failing the workflow.
+    required: false
+    default: 'true'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Run slop-scan
+      shell: bash
+      run: |
+        node "${{ github.action_path }}/bin/slop-scan.js" \
+          "${{ inputs.directory }}" \
+          --threshold "${{ inputs.threshold }}"
+        EXIT_CODE=$?
+        if [[ "${{ inputs.fail-on-suspicious }}" == "false" ]]; then
+          exit 0
+        fi
+        exit $EXIT_CODE
